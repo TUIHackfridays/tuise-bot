@@ -1,4 +1,4 @@
-#!/Users/rudolfvanderven/tuise-bot/venv/bin/python
+#!/Users/rudolfvanderven/tuise-mainbot/venv/bin/python
 
 import sys
 import getopt
