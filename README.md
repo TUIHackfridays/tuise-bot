@@ -53,6 +53,10 @@ access_key = IVONA_ACCESS_KEY
 secret_key = IVONA_SECRET_KEY
 ```
 
+```
+Not necessary at the moment, there are working API keys in the current config already!
+```
+
 Edit the bot configuration file `bot_config.json` at project root
 
 ```
