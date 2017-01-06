@@ -1,0 +1,66 @@
+INFO:api_dudebot.py:App listening at port 8080
+DEBUG:__main__:route matched for url http://localhost:8080/; route_name: '__/', path_info: u'/', pattern: '/*subpath', matchdict: {'subpath': ()}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/ (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b7b29e0>): Allowed (no authorization policy in use)
+DEBUG:__main__:route matched for url http://localhost:8080/sounds/on.mp3; route_name: '__/', path_info: u'/sounds/on.mp3', pattern: '/*subpath', matchdict: {'subpath': (u'sounds', u'on.mp3')}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/sounds/on.mp3 (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b7b28c0>): Allowed (no authorization policy in use)
+DEBUG:__main__:route matched for url http://localhost:8080/available-triggers; route_name: 'triggers', path_info: u'/available-triggers', pattern: '/available-triggers', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/available-triggers (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b7b28c0>): Allowed (no authorization policy in use)
+DEBUG:__main__:route matched for url http://localhost:8080/commands; route_name: 'commands', path_info: u'/commands', pattern: '/commands', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/commands (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b7b2878>): Allowed (no authorization policy in use)
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b7b29e0>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:What is it!?! Can't you see I'm busy?
+DEBUG:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): tts.us-east-1.ivonacloud.com
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b97c5a8>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:WHAT???
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b97ca70>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:WHAT???
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a37e8>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:How can I help?
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a4488>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:How can I help?
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a6098>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:How can I help?
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a6cf8>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:One is glad to be of service!
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9aa908>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:One is glad to be of service!
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a5560>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:How can I help?
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a8200>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:WHAT???
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/sounds/on.mp3; route_name: '__/', path_info: u'/sounds/on.mp3', pattern: '/*subpath', matchdict: {'subpath': (u'sounds', u'on.mp3')}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/sounds/on.mp3 (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a8dd0>): Allowed (no authorization policy in use)
+DEBUG:__main__:route matched for url http://localhost:8080/available-triggers; route_name: 'triggers', path_info: u'/available-triggers', pattern: '/available-triggers', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/available-triggers (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9ac950>): Allowed (no authorization policy in use)
+DEBUG:__main__:route matched for url http://localhost:8080/commands; route_name: 'commands', path_info: u'/commands', pattern: '/commands', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/commands (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a8cf8>): Allowed (no authorization policy in use)
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9a8dd0>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:What is it!?! Can't you see I'm busy?
+DEBUG:requests.packages.urllib3.connectionpool:Resetting dropped connection: tts.us-east-1.ivonacloud.com
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
+DEBUG:__main__:route matched for url http://localhost:8080/trigger; route_name: 'trigger', path_info: u'/trigger', pattern: '/trigger', matchdict: {}, predicates: ''
+DEBUG:__main__:debug_authorization of url http://localhost:8080/trigger (view name u'' against context <pyramid.traversal.DefaultRootFactory instance at 0x10b9acb90>): Allowed (no authorization policy in use)
+INFO:api_dudebot.py:One is glad to be of service!
+DEBUG:requests.packages.urllib3.connectionpool:Resetting dropped connection: tts.us-east-1.ivonacloud.com
+DEBUG:requests.packages.urllib3.connectionpool:https://tts.us-east-1.ivonacloud.com:443 "POST /CreateSpeech HTTP/1.1" 200 None
