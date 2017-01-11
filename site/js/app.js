@@ -12,8 +12,7 @@ function kickoff() {
   var triggers = ['dude', 'hey dude', 'hey mate', 'ok dude', 'okay dude'];
   var commands = {
     "echo": {
-      "triggers": ['echo', 'repeat'],
-      "message": false
+      "triggers": ['echo', 'repeat']
     }
   };
 
@@ -120,7 +119,7 @@ function kickoff() {
                 });
               }
               if(commandDetected) {
-                callCommand(key);
+                callCommand(key, finalText);
 
                 state.triggered = false;
                 state.waiting = false;
@@ -172,8 +171,8 @@ function kickoff() {
     finals.innerHTML = resp.message.replace(/\n/g, "<br />") || "";
   }
 
-  function callCommand(command) {
-    request('POST', 'execute', {"command": command, "message": ""}, showResult);
+  function callCommand(command, content) {
+    request('POST', 'execute', {"command": command, "content": content}, showResult);
   }
 
   // ---------------------------- WEB AUDIO ---------------------------

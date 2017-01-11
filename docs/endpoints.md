@@ -38,14 +38,12 @@ Get the commands and commands configuration
 + Response 200 (application/json)
     + Attributes (object)
         - command: (object) the defined command
-          - message: false (boolean) if the command needs more input
           - triggers: ["command-trigger-word1", "command-trigger-word2", "command-trigger-word3"]  (array of strings)
     + Body
 
         ```json
         {
           "command": {
-            "message": false,
             "triggers": [
               "command-trigger-word1",
               "command-trigger-word2",
@@ -60,13 +58,11 @@ Tell the bot to execute the command
 + Request (application/json)
     + Attributes (object)
         - command: command (string)
-        - message: more user input (string)
     + Body
 
         ```json
       {
-        "command": "question",
-        "message": "Is it going to rain in Lisboa Portugal?"
+        "command": "ping"
       }
       ```
 + Response 200 (application/json)
