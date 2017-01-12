@@ -10,4 +10,4 @@
 - [How to use IFTTT with the bot](./ifttt_guide.md)
 
 ## Pyvona
-- [Pyvona configuration](./pyvona.md)
+- [Pyvona voice configuration](./pyvona.md)

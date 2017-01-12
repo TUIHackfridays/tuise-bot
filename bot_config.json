@@ -12,9 +12,12 @@
         "ping"
       ]
     },
-    "play song android": {
+    "play song on android": {
       "triggers": [
-        "play song android"
+        "play song on android",
+        "play song in android",
+        "play song android",
+        "play android song"
       ]
     },
     "question": {

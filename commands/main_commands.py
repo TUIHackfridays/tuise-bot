@@ -17,8 +17,8 @@ def process_command(command, message=""):
 
     if command == "ping":
         talk, result = pong()
-    elif command == "play song android":
-        talk, result = ifttt_call("play_song_android", {"value1" : "Alan Walker - Fade", "value2" : "", "value3" : ""})
+    elif command == "play song on android":
+        talk, result = ifttt_call("play_song_on_android", {"value1" : "Alan Walker - Faded", "value2" : "", "value3" : ""})
     elif command == "question":
         talk, result = question.get_question_result(message)
 

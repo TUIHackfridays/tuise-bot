@@ -13,7 +13,7 @@ class Question():
 
     def get_question_result(self, question):
         # clean the question command from the question
-        question = question.replace("question", "", 1)
+        question = question[0].replace("question", "", 1)
         result = "Sorry, couldn't find the answer."
         res = self.wa.query(question)
         if res["@numpods"] != '0':
@@ -23,4 +23,4 @@ class Question():
                     if sub.plaintext is not None:
                         result += sub.plaintext + "\n"
 
-        return result
+        return True, result

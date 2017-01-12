@@ -1,4 +1,4 @@
-# Tuise
+# Tuise-bot
 
 ## Installation
 
@@ -39,8 +39,8 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
     $ export VENV=path-to-your-dir/venv
     $ virtualenv --system-site-packages $VENV
     $ . $VENV/bin/activate
-    $ $VENV/bin/pip install wolframalpha
-    $ $VENV/bin/pip install "pyramid==1.7.3"
+    (venv) $ $VENV/bin/pip install wolframalpha
+    (venv) $ $VENV/bin/pip install "pyramid==1.7.3"
 
 ### For Windows
 
@@ -48,8 +48,8 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
     > SET VENV=path-to-your-dir\venv
     > python -m virtualenv --system-site-packages %VENV%
     > %VENV%\Scripts\activate
-    > %VENV%\Scripts\pip install wolframalpha
-    > %VENV%\Scripts\pip install "pyramid==1.7.3"
+    (venv) > %VENV%\Scripts\pip install wolframalpha
+    (venv) > %VENV%\Scripts\pip install "pyramid==1.7.3"
 
 
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
@@ -87,7 +87,7 @@ Edit the bot configuration file `bot_config.json` at project root
 - **grettings**: the bot responses to being woken
 - **voice**: the voice configuration from ivona
 
-## Note
+## Note (pyOpenSSL)
 Before running check your pyOpenSSL version. It needs to be **>= 0.14**.
 
 Run this to check the version:
@@ -96,7 +96,7 @@ Run this to check the version:
 
 Run this to update it:    
 
-    $ $VENV/bin/pip install -U pyOpenSSL
+    (venv) $ $VENV/bin/pip install -U pyOpenSSL
 
 In Windows:
 
@@ -104,22 +104,24 @@ In Windows:
 
 ## Run
 
-    $ $VENV/bin/python api_dudebot.py
+    (venv) $ $VENV/bin/python api_dudebot.py
 
 In Windows:
 
-    > %VENV%\Scripts\python api_dudebot.py
+    (venv) > %VENV%\Scripts\python api_dudebot.py
 
 The app will start listening on port: `8080`.
 Open the browser into [localhost:8080](http://localhost:8080) and you should see the bot.
 
+Read the [site README](./site) to know how to interact with the bot.
+
 ## Stop running bot/venv
 
     CTRL+C
-    $ deactivate
+    (venv) $ deactivate
 
-### Note
-Run in Google Chrome has this uses `Speech Recognition API`  and currently only Chrome and Opera have partial support for it.
+### Note (Browser)
+Run in Google Chrome has this uses `Speech Recognition API` and currently only Chrome and Opera have partial support for it.
 
 ## Docs
 [docs](./docs)
