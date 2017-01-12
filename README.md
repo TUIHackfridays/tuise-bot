@@ -51,7 +51,6 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
     (venv) > %VENV%\Scripts\pip install wolframalpha
     (venv) > %VENV%\Scripts\pip install "pyramid==1.7.3"
 
-
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
 
 Get an [IFTTT maker key](https://ifttt.com/maker) just press connect and go to settings the url there should have the key `https://maker.ifttt.com/use/KEY-IS-HERE`

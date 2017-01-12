@@ -14,7 +14,7 @@ post(request_url, data=payload);
 The bot already has a function that makes this request. You just need to pass the event and the payload as parameters. [(See bellow)](#TUISE-BOT)
 
 
-## Sign Up/Sign In
+## Sign Up / Sign In
 In order to connect to IFTTT you'll need to create an account first [sign up](https://ifttt.com/join) or if you already have one [sign in](https://ifttt.com/login).
 
 ![0-sign-in](http://i.imgur.com/Azs8pih.png)
