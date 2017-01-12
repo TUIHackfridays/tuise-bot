@@ -43,3 +43,5 @@ recognizer.lang = 'en-US'; // set language
 
 ### Note
 Open in Google Chrome has this uses `Speech Recognition API` and currently only Chrome and Opera have partial support for it.
+
+[<< back](../../../)

@@ -15,6 +15,7 @@ function kickoff() {
       "triggers": ['echo', 'repeat']
     }
   };
+  var scroller = null;
 
   // ----------------- GET/POST ---------------------
 
@@ -44,9 +45,6 @@ function kickoff() {
     commands = commands_obj || commands;
     console.log("commands set:", commands);
   }
-
-  request('GET', 'available-triggers', null, setTriggers);
-  request('GET', 'commands', null, setCommands);
 
   // ------------------------ WEB SPEECH API --------------------------
 
@@ -169,6 +167,23 @@ function kickoff() {
   function showResult(resp){
     var finals = document.getElementsByClassName("bot_text")[0];
     finals.innerHTML = resp.message.replace(/\n/g, "<br />") || "";
+
+    autoScroll(finals);
+  }
+
+  function autoScroll(element) {
+    var lineHeight = parseInt(element.style.lineHeight) || 70;
+    if(element.scrollHeight <= 70) return;
+    if(scroller) clearTimeout(scroller);
+    function scrollStart() {
+      if(element.scrollTop + lineHeight < element.scrollHeight) {
+        element.scrollTop += 7;
+      } else {
+        element.scrollTop = 0;
+      }
+      scroller = setTimeout(scrollStart, 500);
+    }
+    scroller = setTimeout(scrollStart, 500);
   }
 
   function callCommand(command, content) {
@@ -257,6 +272,9 @@ function kickoff() {
   if(SpeechRecognition === null){
     alert("Web Speech API is not supported.");
   } else {
+    request('GET', 'available-triggers', null, setTriggers);
+    request('GET', 'commands', null, setCommands);
+
     startSpeechRecognier(true);
     getUserVoice();
   }
