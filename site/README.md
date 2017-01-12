@@ -3,10 +3,15 @@
 ## Interaction
 
 **Steps**
+
 1. Say trigger words
+
 2. Bot responds
+
 3. Say command
+
 4. Bot responds
+
 5. Repeat
 
 ----
