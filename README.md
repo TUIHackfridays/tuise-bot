@@ -78,12 +78,18 @@ Edit the bot configuration file `bot_config.json` at project root
 {
 	"triggers": ['dude', 'hey dude', 'hey mate', 'ok dude', 'okay dude'],
 	"greetings": ["Sire?", "One is glad to be of service!", "How can I help?", "What is it!?! Can't you see I'm busy?", "WHAT???"],
+  "commands": {
+    "ping": { "triggers": [ "ping" ] },
+    "play song on android": { "triggers": [ "play song on android", "play song in android", "play song android", "play android song" ] },
+    "question": { "triggers": [ "question" ] }
+  },
 	"voice": {"voice_name": "Brian", "language": "en-GB", "gender": "Male"}
 }
 ```
 
 - **triggers**: the triggers that "wake" the bot (words you say so that the bot know you want to execute a command)
 - **grettings**: the bot responses to being woken
+- **commands**: the commands that the bot will execute
 - **voice**: the voice configuration from ivona
 
 ## Note (pyOpenSSL)

@@ -118,7 +118,7 @@ We added the following commands to the commands object in bot_config file.
     "play song on android",
     "play song in android",
     "play song android",
-    "play android song",
+    "play android song"
   ]
 }
 ```
