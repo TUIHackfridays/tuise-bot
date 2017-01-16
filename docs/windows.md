@@ -1,5 +1,17 @@
 # Windows
 
+## Software
+- [Google Chrome](https://www.google.com/chrome/)
+- [Python](https://www.python.org/downloads/release/python-2712/)
+
+### Project Dependecies
+- [Pygame](http://www.pygame.org/download.shtml)
+- [Requests](http://docs.python-requests.org/en/master/)
+- [Pyvona](https://pypi.python.org/pypi/pyvona/)
+- [Virtualenv](https://virtualenv.pypa.io/en/stable/)
+- [Wolfram|Alpha](https://pypi.python.org/pypi/wolframalpha)
+- [Pyramid](https://trypyramid.com/)
+
 ## Installation
 
 Install [Python](https://www.python.org/downloads/release/python-2712/) (install the Windows x86 MSI installer)
