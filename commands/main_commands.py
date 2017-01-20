@@ -1,21 +1,25 @@
 from ping.ping import pong
-from question.question import Question as Q
+from ifttt.ifttt import ifttt_call
+from wolfram_question.question import Question as Q
 question = Q()
 
 def process_command(command, message=""):
-    """Returns the result of executing the command, usually a string for the to say.
-    Return an empty string if you don't wish the bot to speak.
+    """Returns a flag (boolean) and the result of executing the command, usually a string for the to say.
+    Set the talk flag to true if you want the bot to speak otherwise set it to false.
 
     Keyword arguments:
     command -- the command received
     message -- the message received, empty by default
     """
 
+    talk = True
     result = "Sorry but that command is not part of my functions."
 
     if command == "ping":
-        result = pong()
+        talk, result = pong()
+    elif command == "play song on android":
+        talk, result = ifttt_call("play_song_on_android", {"value1" : "Alan Walker - Faded", "value2" : "", "value3" : ""})
     elif command == "question":
-        result = question.get_question_result(message)
+        talk, result = question.get_question_result(message)
 
-    return result
+    return talk, result

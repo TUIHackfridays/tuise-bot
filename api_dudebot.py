@@ -121,14 +121,12 @@ def get_commands(request):
 def execute_command(request):
     data = request.json_body
     log.info(data)
+    talk = True
     result = "Sorry but I cannot recognize the command."
     if data["command"]:
-        if data["message"]:
-            result = process_command(data["command"], data["message"])
-        else:
-            result = process_command(data["command"])
+        talk, result = process_command(data["command"], data["content"])
 
-    if result != "":
+    if talk:
         threadSpeak(result)
 
     request.response.status = 200

@@ -10,17 +10,20 @@
     "ping": {
       "triggers": [
         "ping"
-      ],
-      "message": false
+      ]
+    },
+    "play song on android": {
+      "triggers": [
+        "play song on android",
+        "play song in android",
+        "play song android",
+        "play android song"
+      ]
     },
     "question": {
       "triggers": [
-        "question",
-        "questions",
-        "pergunta",
-        "questao"
-      ],
-      "message": true
+        "question"
+      ]
     }
   },
   "greetings": [

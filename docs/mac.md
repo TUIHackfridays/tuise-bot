@@ -24,4 +24,4 @@ Install virtualenv
 
     $ sudo pip install virtualenv
 
-[<< back](../../../#usage)
+[<< back](../../../#usage) to continue the installation

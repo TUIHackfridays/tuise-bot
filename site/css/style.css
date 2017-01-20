@@ -10,9 +10,8 @@
 .bot_text {
   text-align: center;
   text-shadow: 0 0 15px;
-  overflow-y: auto;
-  min-height: 70px;
-  max-height: 70px;
+  overflow: auto;
+  height: 70px;
   line-height: 70px;
   vertical-align: middle;
   border-top-left-radius: 10px;

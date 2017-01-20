@@ -1,5 +1,34 @@
-commands/time/__init__.py
-commands/time/__init__.pyc
-commands/time/ping.pyc
-commands/time/time.py
-commands/time/time.pyc
+# Logs
+logs
+*.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+
+# IDEA/Webstorm project files
+.idea
+*.iml
+
+# Mac files
+.DS_Store
+
+config.cfg
+
+**/stt.txt
+**/file.flac
+**/file.wav
+
+venv/
+
+# ignore compiled file
+*.pyc
+
+ngrok
+
+commands/time
