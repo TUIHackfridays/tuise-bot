@@ -9,5 +9,8 @@
 ## IFTTT Guide
 - [How to use IFTTT with the bot](./ifttt_guide.md)
 
+## Translations Guide
+- [Using the translations](./translations.md)
+
 ## Pyvona
 - [Pyvona voice configuration](./pyvona.md)

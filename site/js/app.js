@@ -1,4 +1,4 @@
-/* global webkitSpeechRecognition:true */
+/* global webkitSpeechRecognition:true, io:true */
 
 function kickoff() {
   var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition || null;
@@ -15,7 +15,11 @@ function kickoff() {
       "triggers": ['echo', 'repeat']
     }
   };
-  var scroller = null;
+  var scroller = null, voiceAnim = null;
+  var bot_states = {
+    "speaking": false,
+    "triggered": false
+  };
 
   // ----------------- GET/POST ---------------------
 
@@ -93,65 +97,67 @@ function kickoff() {
     recognizer.onresult = function(event) {
       // the event holds the results
 
-      if (typeof(event.results) === 'undefined') { //Something is wrong…
-          recognizer.stop();
-          return;
-      }
+      // if the bot isn't speaking process the speech results
+      if(!bot_states.speaking) {
+        if (typeof(event.results) === 'undefined') { //Something is wrong…
+            recognizer.stop();
+            return;
+        }
 
-      for (var i = event.resultIndex; i < event.results.length; ++i) {
-        if(event.results[i].isFinal) {
-          // get all the final words into array
-          var finalText = [];
-          for(var j = 0; j < event.results[i].length; ++j) {
-            finalText.push(event.results[i][j].transcript);
-          }
-
-          // if triggered call detected command else try to detect trigger
-          if(state.triggered) {
-            Object.keys(commands).forEach(function(key) {
-              var key_trigger = commands[key]["triggers"];
-              var commandDetected;
-              if(key_trigger) {
-                commandDetected = key_trigger.some(function(word) {
-                  return finalText.join(', ').toLowerCase().indexOf(word.toLowerCase()) !== -1;
-                });
-              }
-              if(commandDetected) {
-                callCommand(key, finalText);
-
-                state.triggered = false;
-                state.waiting = false;
-              }
-            });
-
-            if (!state.waiting)
-              setTimeout(function(){
-                state.triggered = false;
-                state.waiting = false;
-              },4000);
-
-            state.waiting = true;
-          } else {
-            state.triggered = triggers.some(function(word) {
-              return finalText.join(', ').toLowerCase().indexOf(word.toLowerCase()) !== -1;
-            });
-            if(state.triggered) {
-              document.getElementById("on").play();
-              request('GET', 'trigger', null, showResult);
-              console.log("TRIGGER DETECTED", finalText);
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+          if(event.results[i].isFinal) {
+            // get all the final words into array
+            var finalText = [];
+            for(var j = 0; j < event.results[i].length; ++j) {
+              finalText.push(event.results[i][j].transcript);
             }
-          }
 
-          console.log("final result:", finalText);
+            // if triggered call detected command else try to detect trigger
+            if(state.triggered) {
+              Object.keys(commands).forEach(function(key) {
+                var key_trigger = commands[key]["triggers"];
+                var commandDetected;
+                if(key_trigger) {
+                  commandDetected = key_trigger.some(function(word) {
+                    return finalText.join(', ').toLowerCase().indexOf(word.toLowerCase()) !== -1;
+                  });
+                }
+                if(commandDetected) {
+                  callCommand(key, finalText);
+
+                  state.triggered = false;
+                  state.waiting = false;
+                }
+              });
+
+              if (!state.waiting)
+                setTimeout(function(){
+                  state.triggered = false;
+                  state.waiting = false;
+                },4000);
+
+              state.waiting = true;
+            } else {
+              state.triggered = triggers.some(function(word) {
+                return finalText.join(', ').toLowerCase().indexOf(word.toLowerCase()) !== -1;
+              });
+              if(state.triggered) {
+                bot_states.triggered = true;
+                request('GET', 'trigger', null, showResult);
+                console.log("TRIGGER DETECTED", finalText);
+              }
+            }
+
+            console.log("final result:", finalText);
+          }
+        }
+
+        if (state.triggered) {
+          // mic on 😃
+        } else {
+          // mic off 😣
         }
       }
-
-      if (state.triggered) {
-        // mic on 😃
-      } else {
-        // mic off 😣
-      }
-
     };
 
     if(auto) {
@@ -267,11 +273,95 @@ function kickoff() {
     window.requestAnimationFrame(animateVoice);
   }
 
+  function animateBotVoice(start) {
+
+    function startBotVoiceAnimation(){
+      var max = 200, min = 110;
+      // var interval = Math.floor(Math.random() * (max - min + 1) + min);
+      var canvas = document.getElementById("canvas_audio");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      var WIDTH = canvas.width;
+      var HEIGHT = canvas.height;
+      var ctx = canvas.getContext("2d");
+      var centerX = WIDTH / 2.0;
+      var centerY = HEIGHT / 2.0;
+
+      var bufferLength = 150;
+      var dataArray = [];
+      while (dataArray.length < bufferLength) {
+        dataArray.push(Math.floor(Math.random() * (max - min + 1) + min))
+      }
+      ctx.fillStyle = 'rgb(0, 0, 0)';
+      ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgb(2, 254, 255)';
+
+      ctx.beginPath();
+
+      // ctx.arc(centerX, centerY, interval, 0, 2*Math.PI);
+
+      var x = 0, y = 0, radius = 150;
+
+      for (var i = 0; i < bufferLength; i++) {
+          var rads = Math.PI * 2 / bufferLength;
+          var v = dataArray[i] / 10.0;
+
+          var vx = centerX + Math.cos(rads * i) * (radius + v);
+          var vy = centerY + Math.sin(rads * i) * (radius + v);
+
+          if (i === 0) {
+              x = vx, y = vy;
+              ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(vx, vy);
+          }
+
+          if(i === bufferLength -1 ) {
+            ctx.lineTo(x, y);
+          }
+      }
+
+      ctx.stroke();
+
+      voiceAnim = window.requestAnimationFrame(startBotVoiceAnimation);
+    }
+
+    if(start) {
+      startBotVoiceAnimation();
+    } else {
+      window.cancelAnimationFrame(voiceAnim);
+    }
+  }
+
   // ----------------- INIT -------------------------
 
   if(SpeechRecognition === null){
     alert("Web Speech API is not supported.");
   } else {
+    var socket = io(address);
+
+	  socket.on('connect', function(data){
+      if(data) console.log("connected", data);
+    });
+
+	  socket.on('speak', function(data){
+      if(data) {
+        console.log(data);
+        bot_states.speaking = data.started;
+        animateBotVoice(bot_states.speaking);
+        if(bot_states.triggered && !bot_states.speaking) {
+          document.getElementById("on").play();
+          bot_states.triggered = false;
+        }
+      }
+    });
+
+	  socket.on('disconnect', function(data){
+      if(data) console.log("disconnected", data);
+    });
+
     request('GET', 'available-triggers', null, setTriggers);
     request('GET', 'commands', null, setCommands);
 

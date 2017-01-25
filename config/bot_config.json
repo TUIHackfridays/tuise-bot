@@ -24,6 +24,11 @@
       "triggers": [
         "question"
       ]
+    },
+    "translate": {
+      "triggers": [
+        "translate"
+      ]
     }
   },
   "greetings": [

@@ -1,20 +1,19 @@
-import os
 import logging
 import pyvona
 import ConfigParser
 import random
 import json
-import threading
+import socketio
+import eventlet
+
+from socketio import Middleware
+from eventlet import wsgi
 
 from pyramid.config import Configurator
-from pyramid.response import Response
-from pyramid.exceptions import NotFound
-from pyramid.httpexceptions import HTTPFound
 from pyramid.view import view_config
 
-from wsgiref.simple_server import make_server
-
 from commands.main_commands import process_command
+
 
 # setup logging
 logging.basicConfig(filename='dudebot.log', level=logging.DEBUG)
@@ -22,7 +21,7 @@ log = logging.getLogger(__file__)
 
 # get configuration
 configParser = ConfigParser.RawConfigParser()
-configFilePath = r'config.cfg'
+configFilePath = r'config/config.cfg'
 configParser.read(configFilePath)
 
 access_key = configParser.get('main', 'access_key')
@@ -43,26 +42,50 @@ voice.voice_name="Brian"
 voice.language="en-GB"
 voice.gender="Male"
 
+translation_voice = None
+
+# socket io
+sio = socketio.Server()
+socketID = None
+
 # app setup
 port = 8080
 
+
 def load_bot_configuration():
-    with open('bot_config.json') as json_data:
+    with open('config/bot_config.json') as json_data:
         bot_conf = json.load(json_data)
 
     return bot_conf
 
 
+def callBotAnimation(started):
+    if socketID is not None:
+        sio.emit('speak', data={"started": started}, room=socketID)
+
+
 def speak(text):
-    voice_cnf = load_bot_configuration()["voice"]
-    voice.voice_name=voice_cnf["voice_name"]
-    voice.language=voice_cnf["language"]
-    voice.gender=voice_cnf["gender"]
+    global translation_voice
+    log.info("text to speak - %s" % text)
+
+    if translation_voice is not None:
+        voice.voice_name = translation_voice["voice_name"]
+        voice.language = translation_voice["language"]
+        voice.gender = translation_voice["gender"]
+    else:
+        voice_cnf = load_bot_configuration()["voice"]
+        voice.voice_name = voice_cnf["voice_name"]
+        voice.language = voice_cnf["language"]
+        voice.gender = voice_cnf["gender"]
+
     voice.speak(text)
+    callBotAnimation(False)
+    translation_voice = None
 
 
 def threadSpeak(text):
-    threading.Thread(target=speak, args=(text,)).start()
+    callBotAnimation(True)
+    eventlet.spawn(speak, text=text)
 
 
 # views
@@ -119,12 +142,14 @@ def get_commands(request):
     renderer='json'
 )
 def execute_command(request):
+    global translation_voice
+    
     data = request.json_body
     log.info(data)
     talk = True
     result = "Sorry but I cannot recognize the command."
     if data["command"]:
-        talk, result = process_command(data["command"], data["content"])
+        talk, result, translation_voice = process_command(data["command"], data["content"])
 
     if talk:
         threadSpeak(result)
@@ -140,6 +165,25 @@ def execute_command(request):
 def notfound_view(request):
     request.response.status = '404 Not Found'
     return { "code" : 404, "message" : 'Not Found'}
+
+
+# -------------------- Socket io ------------------
+
+
+@sio.on('connect')
+def connect(sid, environ):
+    global socketID
+    socketID = sid
+    log.info('connect %s' % sid)
+    sio.emit('connect', data={"user connected": socketID}, room=socketID)
+    
+
+@sio.on('disconnect')
+def disconnect(sid):
+    global socketID
+    socketID = None
+    log.info('disconnect %s' % sid)
+    sio.emit('disconnect', data={"user disconnected": sid})
 
 
 if __name__ == '__main__':
@@ -161,5 +205,6 @@ if __name__ == '__main__':
     config.scan()
     # serve app
     app = config.make_wsgi_app()
-    server = make_server('0.0.0.0', port, app)
-    server.serve_forever()
+    # wrap application with socketio's middleware
+    app_wrap = Middleware(sio, app)
+    wsgi.server(eventlet.listen(('0.0.0.0', port)), app_wrap)
