@@ -27,7 +27,12 @@ config.cfg
 venv/
 
 # ignore compiled file
-*.pyc
+**.pyc
 
 ngrok
 tmp
+commands/time
+
+# ignore log file
+dudebot.log
+
