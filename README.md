@@ -1,7 +1,12 @@
 # Tuise-bot
 
 ## Changes
-  The configurations files were moved inside a config folder to keep things more organized if your `config.cfg` in the project root move it inside the `config` folder.
+The configurations files were moved inside a config folder to keep things more organized if your `config.cfg` in the project root move it inside the `config` folder.
+
+### New dependencies
+- For traffic:
+  * lxml
+  * geopy
 
 ## Installation
 
@@ -46,6 +51,8 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
     (venv) $ $VENV/bin/pip install "pyramid==1.7.3"
     (venv) $ $VENV/bin/pip install python-socketio
     (venv) $ $VENV/bin/pip install eventlet
+    (venv) $ $VENV/bin/pip install lxml
+    (venv) $ $VENV/bin/pip install geopy
 
 ### For Windows
 
@@ -57,6 +64,8 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
     (venv) > %VENV%\Scripts\pip install "pyramid==1.7.3"
     (venv) > %VENV%\Scripts\pip install python-socketio
     (venv) > %VENV%\Scripts\pip install eventlet
+    (venv) > %VENV%\Scripts\pip install lxml
+    (venv) > %VENV%\Scripts\pip install geopy
 
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
 

@@ -2,9 +2,11 @@ from ping.ping import pong
 from ifttt.ifttt import ifttt_call
 from wolfram_question.question import Question as Q
 from translate.translate import translate
+from traffic.traffic import Traffic as T
 
 
 question = Q()
+traffic = T()
 
 
 def process_command(command, message=""):
@@ -29,5 +31,7 @@ def process_command(command, message=""):
         talk, result = question.get_question_result(message)
     elif command == "translate":
         talk, result, _voice = translate(message)
+    elif command == "traffic":
+        talk, result = traffic.traffic(message)
 
     return talk, result, _voice

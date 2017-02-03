@@ -12,5 +12,8 @@
 ## Translations Guide
 - [Using the translations](./translations.md)
 
+## Traffic Guide
+- [Using the translations](./traffic.md)
+
 ## Pyvona
 - [Pyvona voice configuration](./pyvona.md)

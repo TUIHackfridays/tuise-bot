@@ -29,6 +29,11 @@
       "triggers": [
         "translate"
       ]
+    },
+    "traffic": {
+      "triggers": [
+        "traffic"
+      ]
     }
   },
   "greetings": [
