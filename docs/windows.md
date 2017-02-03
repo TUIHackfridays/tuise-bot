@@ -16,6 +16,7 @@
 
 Install [Python](https://www.python.org/downloads/release/python-2712/) (install the Windows x86 MSI installer)
 Install [pygame](http://www.pygame.org/download.shtml) (install pygame-1.9.1.win32-py2.7.msi)
+Install [Microsoft Visual C++ Compiler for Python 2.7](http://aka.ms/vcpython27)
 
 
 Install [pyvona](https://github.com/zbears/pyvona) and its dependencies

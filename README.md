@@ -67,6 +67,9 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
     (venv) > %VENV%\Scripts\pip install lxml
     (venv) > %VENV%\Scripts\pip install geopy
 
+#### Note
+If you can't install lxml using the above command, in windows, try downloading the [lxml-3.7.2-cp27-cp27m-win32.whl](http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml), copy it to the project root and run `%VENV%\Scripts\pip install lxml-3.7.2-cp27-cp27m-win32.whl`
+
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
 
 Get an [IFTTT maker key](https://ifttt.com/maker) just press connect and go to settings the url there should have the key `https://maker.ifttt.com/use/KEY-IS-HERE`
