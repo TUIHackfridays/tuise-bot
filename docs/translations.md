@@ -26,13 +26,13 @@ Here's the list:
 * Turkish
 * Welsh
 
-## Implemetation
+## Implementation
 
 The code in `translate.py` has the following functions:
 - `translate` - will check if the desired language is supported and return the translation and the voice configurations to speak in the language or `None` if not supported
 - `_get_valid_locale` - will get the list of supported languages and check if the desired one is supported returning the locale or `Ǹone` if not supported
 - `_caseless_equal` - will validate if the inputed pattern is in the inputed text returning `True` or `False`
-- `_get_parameters` - will parse the recieved input to get the the sentece and the desired language to translate
+- `_get_parameters` - will parse the recieved input to get the sentece and the desired language to translate
 
 ## Note
 This functionality uses Google to get the translations but the voices the bot can speak in are limited. If you want you can reuse this and make a text only return version like discribed bellow.

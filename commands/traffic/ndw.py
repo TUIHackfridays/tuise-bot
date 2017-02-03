@@ -71,7 +71,7 @@ class NDW():
             5: highest, 4: high,3: medium, 2: low, 1: lowest, 0: none, -1: unknown, default: 3
         limit -- the maximum number of resut to get, default: 20
         """
-#        self._poll_data()
+        self._poll_data()
         self._parse_data()
         namespace = "{http://datex2.eu/schema/2/2_0}"
         xsi = "{http://www.w3.org/2001/XMLSchema-instance}"
