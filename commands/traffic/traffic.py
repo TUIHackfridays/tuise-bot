@@ -32,11 +32,12 @@ class Traffic():
         message -- the full command with the location.
         """
         talk = True
+        
         # TODO
         # get the location using the _get_parameters function
         # get the result using the class ndw get general traffic function
-        location = self._get_parameters(message)
-        result = self.ndw.getGeneralTraffic(location, 3, 10)      
+        location = None
+        result = None
         
         if not result:
             result = "No traffic information for location %s" % location
