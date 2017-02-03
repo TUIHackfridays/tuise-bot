@@ -30,8 +30,9 @@ venv/
 **.pyc
 
 ngrok
-
+tmp
 commands/time
 
 # ignore log file
 dudebot.log
+

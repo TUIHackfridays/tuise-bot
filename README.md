@@ -1,5 +1,13 @@
 # Tuise-bot
 
+## Changes
+The configurations files were moved inside a config folder to keep things more organized if your `config.cfg` in the project root move it inside the `config` folder.
+
+### New dependencies
+- For traffic:
+  * lxml
+  * geopy
+
 ## Installation
 
 [MAC OS GUIDE](./docs/mac.md)
@@ -41,6 +49,10 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
     $ . $VENV/bin/activate
     (venv) $ $VENV/bin/pip install wolframalpha
     (venv) $ $VENV/bin/pip install "pyramid==1.7.3"
+    (venv) $ $VENV/bin/pip install python-socketio
+    (venv) $ $VENV/bin/pip install eventlet
+    (venv) $ $VENV/bin/pip install lxml
+    (venv) $ $VENV/bin/pip install geopy
 
 ### For Windows
 
@@ -50,6 +62,10 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
     > %VENV%\Scripts\activate
     (venv) > %VENV%\Scripts\pip install wolframalpha
     (venv) > %VENV%\Scripts\pip install "pyramid==1.7.3"
+    (venv) > %VENV%\Scripts\pip install python-socketio
+    (venv) > %VENV%\Scripts\pip install eventlet
+    (venv) > %VENV%\Scripts\pip install lxml
+    (venv) > %VENV%\Scripts\pip install geopy
 
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
 
@@ -58,7 +74,7 @@ Get an [IFTTT maker key](https://ifttt.com/maker) just press connect and go to s
 Get an [IVONA Speech Cloud Account](https://www.ivona.com/us/for-business/speech-cloud/) and generate credentials: Access and Secret Key
 
 
-Create configuration file `config.cfg` at project root
+Create configuration file `config.cfg` inside the `config/` folder
 
 ```
 [main]
@@ -72,7 +88,7 @@ secret_key = IVONA_SECRET_KEY
 Not necessary at the moment, there are working API keys in the current config already!
 ```
 
-Edit the bot configuration file `bot_config.json` at project root
+Edit the bot configuration file `bot_config.json` inside the `config/` folder
 
 ```
 {

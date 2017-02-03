@@ -11,7 +11,7 @@ commands/
 - Add an empty `__init__.py` file
 - Add a new python file with the command name (again for simplicity reasons) where you'll add your code
 - Inside main_commands.py import the functionality created and edit the function `process_command` in order to call your functionality
-- Add the command to the bot configuration file in `bot_config.json`. Format:
+- Add the command to the bot configuration file in `config/bot_config.json`. Format:
 ```
 "command": {
   "triggers": [
