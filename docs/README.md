@@ -1,5 +1,8 @@
 # DOCS
 
+## Changes
+- [changes](./changes.md)
+
 ## Endpoints
 - [Available endpoints](./endpoints.md)
 
@@ -17,3 +20,6 @@
 
 ## Pyvona
 - [Pyvona voice configuration](./pyvona.md)
+
+
+[<< back](../../../)

@@ -13,7 +13,11 @@ from pyramid.config import Configurator
 from pyramid.view import view_config
 
 from commands.main_commands import process_command
+from db.database import Database
 
+
+# init database
+db = Database()
 
 # setup logging
 logging.basicConfig(filename='dudebot.log', level=logging.DEBUG)
@@ -38,9 +42,15 @@ greetings = ["Yes?"]
 
 # setup pyvona voice
 voice = pyvona.create_voice(access_key, secret_key)
-voice.voice_name="Brian"
-voice.language="en-GB"
-voice.gender="Male"
+voice_cnf = db.get_bot_setting()
+if voice_cnf is not None:
+    voice.voice_name = voice_cnf["voice_name"]
+    voice.language = voice_cnf["language"]
+    voice.gender = voice_cnf["gender"]
+else:
+    voice.voice_name="Brian"
+    voice.language="en-GB"
+    voice.gender="Male"
 
 translation_voice = None
 
@@ -73,7 +83,9 @@ def speak(text):
         voice.language = translation_voice["language"]
         voice.gender = translation_voice["gender"]
     else:
-        voice_cnf = load_bot_configuration()["voice"]
+        voice_cnf = db.get_bot_setting()
+        if voice_cnf is None:
+            voice_cnf = load_bot_configuration()["voice"]
         voice.voice_name = voice_cnf["voice_name"]
         voice.language = voice_cnf["language"]
         voice.gender = voice_cnf["gender"]
@@ -159,6 +171,60 @@ def execute_command(request):
 
 
 @view_config(
+    route_name='translation_locales',
+    request_method=('GET'),
+    renderer='json'
+)
+def get_translation_locale(request):
+    request.response.status = 200
+    locales = db.get_translation_voices()
+    log.info(locales)
+    return {"message": locales}
+    
+
+@view_config(
+    route_name='bot_all_settings',
+    request_method=('GET'),
+    renderer='json'
+)
+def get_all_bot_settings(request):
+    request.response.status = 200
+    settings = db.get_all_bot_settings()
+    log.info(settings)
+    return {"message": settings}
+    
+   
+@view_config(
+    route_name='bot_settings',
+    request_method=('GET'),
+    renderer='json'
+)
+def get_current_bot_settings(request):
+    request.response.status = 200
+    setting = db.get_bot_setting()
+    log.info(setting)
+    return {"message": setting}
+    
+
+@view_config(
+    route_name='bot_settings',
+    request_method=('POST'),
+    renderer='json'
+)
+def set_current_bot_settings(request):
+    request.response.status = 200
+    data = request.json_body
+    bot_id = data['settings']
+    done = db.set_bot_setting(bot_id)
+    log.info(bot_id)
+    if done:
+        message = "New bot settings was set"
+    else:
+        message = "New bot settings was not set"
+    return {"message": message}
+    
+
+@view_config(
     context='pyramid.exceptions.NotFound',
     renderer='json'
 )
@@ -200,6 +266,9 @@ if __name__ == '__main__':
     config.add_route('trigger', '/trigger')
     config.add_route('commands', '/commands')
     config.add_route('execute', '/execute')
+    config.add_route('translation_locales', '/translation-locales')
+    config.add_route('bot_all_settings', '/bot-settings-all')
+    config.add_route('bot_settings', '/bot-settings')
     config.add_static_view('/', 'site', cache_max_age=3600)
     # scan for @view_config decorators
     config.scan()

@@ -1,12 +1,7 @@
 # Tuise-bot
 
 ## Changes
-The configurations files were moved inside a config folder to keep things more organized if your `config.cfg` in the project root move it inside the `config` folder.
-
-### New dependencies
-- For traffic:
-  * lxml
-  * geopy
+go to [changes](./docs/changes)
 
 ## Installation
 
@@ -18,7 +13,7 @@ The configurations files were moved inside a config folder to keep things more o
 
 Make sure you have recording and python installed
 
-    $ sudo apt-get install libav-tools portaudio19-dev python-setuptools easy_install pip
+    $ sudo apt-get install libav-tools portaudio19-dev python-setuptools python-pip
 
 Install [pyvona](https://github.com/zbears/pyvona) and its dependencies
 
@@ -29,7 +24,7 @@ Install virtualenv
     $ sudo apt-get install python-virtualenv
 
 
-**\[optional\](see [Usage](./#usage))**
+**\[optional\](see [Usage](#usage))**
 
 Download and Install [wolframAlpha python library](https://github.com/jaraco/wolframalpha)
 
