@@ -1,7 +1,13 @@
 /* global webkitSpeechRecognition:true, io:true */
 
 function kickoff() {
-  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition || null;
+  try {
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition || null;
+  }
+  catch(err) {
+    console.error("Starting Web Speech API Error:", err.message);
+    var SpeechRecognition = null;
+  }
 
   // create web audio api context
   var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -201,7 +207,8 @@ function kickoff() {
   var audioSource, gainNode, analyser;
 
   function getUserVoice() {
-    if (!navigator.mediaDevices.getUserMedia) {
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    if (!navigator.mediaDevices.getUserMedia || !navigator.getUserMedia) {
       alert('Your browser does not support the Media Stream API');
     } else {
       var canvas = document.getElementById("canvas_audio");
@@ -209,20 +216,40 @@ function kickoff() {
       canvas.height = window.innerHeight;
       var constraints = { audio: true, video: false };
 
-      navigator.mediaDevices.getUserMedia(constraints)
-      .then(function(mediaStream) {
-        audioSource = audioCtx.createMediaStreamSource(mediaStream);
-        gainNode = audioCtx.createGain();
-        analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 2048;
-        audioSource.connect(gainNode);
-        gainNode.connect(analyser);
-        // uncomment so that audio will come from the speakers
-        // analyser.connect(audioCtx.destination);
-        gainNode.gain.value = 1;
-        animateVoice();
-      })
-      .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
+      if(navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia(constraints)
+        .then(function(mediaStream) {
+          audioSource = audioCtx.createMediaStreamSource(mediaStream);
+          gainNode = audioCtx.createGain();
+          analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 2048;
+          audioSource.connect(gainNode);
+          gainNode.connect(analyser);
+          // uncomment so that audio will come from the speakers
+          // analyser.connect(audioCtx.destination);
+          gainNode.gain.value = 1;
+          animateVoice();
+        })
+        .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
+      } else {
+        navigator.getUserMedia(constraints,
+          function(mediaStream) {
+            audioSource = audioCtx.createMediaStreamSource(mediaStream);
+            gainNode = audioCtx.createGain();
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 2048;
+            audioSource.connect(gainNode);
+            gainNode.connect(analyser);
+            // uncomment so that audio will come from the speakers
+            // analyser.connect(audioCtx.destination);
+            gainNode.gain.value = 1;
+            animateVoice();
+          },
+          function(err) {
+             console.log("The following error occurred: " + err.name);
+          }
+       );
+      }
     }
   }
 
