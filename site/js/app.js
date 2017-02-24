@@ -208,7 +208,7 @@ function kickoff() {
 
   function getUserVoice() {
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-    if (!navigator.mediaDevices.getUserMedia || !navigator.getUserMedia) {
+    if (!navigator.mediaDevices.getUserMedia && !navigator.getUserMedia) {
       alert('Your browser does not support the Media Stream API');
     } else {
       var canvas = document.getElementById("canvas_audio");
