@@ -1,12 +1,7 @@
 # Tuise-bot
 
 ## Changes
-The configurations files were moved inside a config folder to keep things more organized if your `config.cfg` in the project root move it inside the `config` folder.
-
-### New dependencies
-- For traffic:
-  * lxml
-  * geopy
+go to [changes](./docs/changes)
 
 ## Installation
 
@@ -18,7 +13,7 @@ The configurations files were moved inside a config folder to keep things more o
 
 Make sure you have recording and python installed
 
-    $ sudo apt-get install libav-tools portaudio19-dev python-setuptools easy_install pip
+    $ sudo apt-get install libav-tools portaudio19-dev python-setuptools python-pip
 
 Install [pyvona](https://github.com/zbears/pyvona) and its dependencies
 
@@ -29,7 +24,7 @@ Install virtualenv
     $ sudo apt-get install python-virtualenv
 
 
-**\[optional\](see [Usage](./#usage))**
+**\[optional\](see [Usage](#usage))**
 
 Download and Install [wolframAlpha python library](https://github.com/jaraco/wolframalpha)
 
@@ -69,6 +64,8 @@ Create a virtual environment and install wolframalpha (if you didn't before) and
 
 #### Note
 If you can't install lxml using the above command, in windows, try downloading the [lxml-3.7.2-cp27-cp27m-win32.whl](http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml), copy it to the project root and run `%VENV%\Scripts\pip install lxml-3.7.2-cp27-cp27m-win32.whl`
+
+<hr>
 
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
 
