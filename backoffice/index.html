@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>TUISE-BOT Backoffice</title>
+	<meta name="description" content="">
+  <meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/normalize.css" rel="stylesheet" type="text/css">
+	<link href="./css/skeleton.css" rel="stylesheet" type="text/css">
+	<link href="./css/style.css" rel="stylesheet" type="text/css">
+
+	<link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico"/>
+</head>
+
+<body>
+	<div class="back"><a href="../"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+	<div class="row alert">
+		<span id="alert-msg">Welcome to the BackOffice.</span>
+	</div>
+
+	<main class="container">
+    <div class="row">
+				<h1 class="title">BackOffice</h1>
+    </div>
+
+		<div class="row">
+			<h2 class="title2">Who is the Bot</h2>
+			<div class="bot-settings glow"></div>
+    </div>
+
+		<div class="row">
+			<h2 class="title2">What can I speak</h2>
+			<div class="bot-cando glow"></div>
+    </div>
+
+		<div class="row">
+			<h2 class="title2">Change me</h2>
+			<div class="bot-change-settings glow">
+				<form class="form" method="POST" onsubmit="return app.updateBotSettings(this)">
+					<div class="row">
+						<label for="changebot">Change the bot to:</label>
+						<select class="u-full-width glow" id="changebot" name="changebot">
+						</select>
+					</div>
+					<input class="button-primary" type="submit" value="Change">
+				</form>
+			</div>
+    </div>
+
+		<div class="row">
+			<h2 class="title2">Add Automatic Response</h2>
+			<div class="bot-add-reponse glow">
+				<form class="form" method="POST" onsubmit="return app.setResponse(this)">
+				  <div class="row">
+				      <label for="trigger">Trigger</label>
+				      <input class="u-full-width glow" type="text" placeholder="Hello" id="trigger" name="trigger" />
+				  </div>
+					<div class="row">
+						<div class="six columns">
+							<label for="newResp">New Response</label>
+				      <input class="u-full-width glow" type="text" placeholder="Hello, How are you?" id="newResp" name="newResp" />
+				    </div>
+						<div class="six columns">
+							<label for="selectResp">Select Response</label>
+							<select class="u-full-width glow" id="selectResp" name="selectResp">
+							</select>
+						</div>
+				  </div>
+				  <input class="button-primary" type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+
+  </main>
+
+	<script id="template-whoami" type="x-tmpl-mustache">
+		Hello I'm {{ voice_name }}, a {{ gender }} bot!
+		I'm currently speaking in {{ language }}.
+	</script>
+	<script id="template-cando" type="x-tmpl-mustache">
+		The languages I can speak are: {{languages}}.
+	</script>
+	<script id="template-settings" type="x-tmpl-mustache">
+		{{#message}}
+			<option value="{{id}}">{{voice_name}}, {{gender}}, speaks in {{language}}</option>
+		{{/message}}
+	</script>
+	<script id="template-responses" type="x-tmpl-mustache">
+		<option selected="selected" value="-1">No response</option>
+		{{#message}}
+			<option value="{{id}}">{{response}}</option>
+		{{/message}}
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.slim.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+	<script src="./js/app.js"></script>
+</body>
+
+</html>

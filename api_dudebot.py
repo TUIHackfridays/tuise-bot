@@ -5,12 +5,14 @@ import random
 import json
 import socketio
 import eventlet
+import time
 
 from socketio import Middleware
 from eventlet import wsgi
 
 from pyramid.config import Configurator
 from pyramid.view import view_config
+from pyramid.static import QueryStringConstantCacheBuster
 
 from commands.main_commands import process_command
 from db.database import Database
@@ -160,9 +162,13 @@ def execute_command(request):
     log.info(data)
     talk = True
     result = "Sorry but I cannot recognize the command."
-    if data["command"]:
+    if "command" in data:
         talk, result, translation_voice = process_command(data["command"], data["content"])
-
+    else:
+        response = db.get_chat_response(data["content"])
+        if response is not None:
+            result = response["response"]
+    
     if talk:
         threadSpeak(result)
 
@@ -222,7 +228,41 @@ def set_current_bot_settings(request):
     else:
         message = "New bot settings was not set"
     return {"message": message}
-    
+
+
+@view_config(
+    route_name='chat_response',
+    request_method=('GET'),
+    renderer='json'
+)
+def get_chat_responses(request):
+    request.response.status = 200
+    result = db.get_all_chat_response()
+    log.info(result)
+    return {"message": result}
+
+
+@view_config(
+    route_name='chat_response',
+    request_method=('POST'),
+    renderer='json'
+)
+def add_chat_response(request):
+    request.response.status = 200
+    data = request.json_body
+    trigger = data["trigger"]
+    response = data["response"]
+    response_id = data["responseID"]
+    if not response_id == "-1":
+        done = db.set_chat_response(trigger, response_id)
+    else:
+        done = db.set_new_chat_response(trigger, response)
+    if done:
+        message = "New response added"
+    else:
+        message = "New response was not added"
+    return {"message": message}
+
 
 @view_config(
     context='pyramid.exceptions.NotFound',
@@ -269,7 +309,9 @@ if __name__ == '__main__':
     config.add_route('translation_locales', '/translation-locales')
     config.add_route('bot_all_settings', '/bot-settings-all')
     config.add_route('bot_settings', '/bot-settings')
-    config.add_static_view('/', 'site', cache_max_age=3600)
+    config.add_route('chat_response', '/chat-response')
+    config.add_static_view(name='backoffice', path='backoffice', cache_max_age=3600)
+    config.add_static_view(name='/', path='site', cache_max_age=3600)    
     # scan for @view_config decorators
     config.scan()
     # serve app

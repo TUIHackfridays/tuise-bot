@@ -21,7 +21,7 @@ function kickoff() {
       "triggers": ['echo', 'repeat']
     }
   };
-  var scroller = null, voiceAnim = null;
+  var scroller = null, voiceAnim = null, userVoiceAnimation = null, doAnimation = null;
   var bot_states = {
     "speaking": false,
     "triggered": false
@@ -120,7 +120,9 @@ function kickoff() {
 
             // if triggered call detected command else try to detect trigger
             if(state.triggered) {
+              var detected = false, lastIndex = 0;
               Object.keys(commands).forEach(function(key) {
+                lastIndex += 1;
                 var key_trigger = commands[key]["triggers"];
                 var commandDetected;
                 if(key_trigger) {
@@ -129,10 +131,14 @@ function kickoff() {
                   });
                 }
                 if(commandDetected) {
+                  detected = true;
                   callCommand(key, finalText);
 
                   state.triggered = false;
                   state.waiting = false;
+                }
+                if(lastIndex == Object.keys(commands).length && !detected) {
+                  request('POST', 'execute', {"content": finalText[0]}, showResult);
                 }
               });
 
@@ -297,7 +303,8 @@ function kickoff() {
 
     ctx.stroke();
 
-    window.requestAnimationFrame(animateVoice);
+    if(doAnimation)
+      userVoiceAnimation = window.requestAnimationFrame(animateVoice);
   }
 
   function animateBotVoice(start) {
@@ -355,10 +362,13 @@ function kickoff() {
       voiceAnim = window.requestAnimationFrame(startBotVoiceAnimation);
     }
 
-    if(start) {
-      startBotVoiceAnimation();
-    } else {
-      window.cancelAnimationFrame(voiceAnim);
+    console.log("doAnimation", doAnimation);
+    if(doAnimation) {
+      if(start) {
+        startBotVoiceAnimation();
+      } else {
+        window.cancelAnimationFrame(voiceAnim);
+      }
     }
   }
 
@@ -395,6 +405,44 @@ function kickoff() {
     startSpeechRecognier(true);
     getUserVoice();
   }
+
+  function animation(disable) {
+    doAnimation = !disable;
+    // disable css
+    var elements = document.getElementById('arc_container').querySelectorAll('*')
+    if(elements) {
+      for (var el of elements) {
+        if (el.classList) {
+          if(disable) {
+            el.classList.add("disable-anim")
+          }  else {
+              el.classList.remove("disable-anim");
+          }
+        } else {
+          if(disable) {
+            el.className += ' ' + "disable-anim";
+          } else {
+            el.className = el.className.replace(new RegExp('(^|\\b)' + "disable-anim".split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+          }
+        }
+      }
+    }
+
+    // disable canvas
+    if(disable) {
+      window.cancelAnimationFrame(voiceAnim);
+      window.cancelAnimationFrame(userVoiceAnimation);
+    } else {
+      animateVoice();
+    }
+  }
+
+  var toogleAnim = true;
+  animation(toogleAnim);
+  document.getElementById("toggle--push--glow").addEventListener("click", function(){
+    toogleAnim = !toogleAnim;
+    animation(toogleAnim);
+  });
 }
 
 window.addEventListener('load', kickoff, false);
