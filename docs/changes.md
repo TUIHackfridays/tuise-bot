@@ -15,7 +15,7 @@ New endpoints where created to interact with the database data.
 
 ## sqlite
 - Install sqlite:
-  * For Windows and Mac OS got to [sqlite website](http://sqlitebrowser.org/), download and install it.
+  * For Windows and Mac OS go to [sqlite website](http://sqlitebrowser.org/), download and install it.
   * For Linux run the command `sudo apt-get install sqlite3`
 
 ### Note
