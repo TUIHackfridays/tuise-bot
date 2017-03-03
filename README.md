@@ -1,7 +1,7 @@
 # Tuise-bot
 
 ## Changes
-go to [changes](./docs/changes)
+go to [changes](./docs/changes.md)
 
 ## Installation
 

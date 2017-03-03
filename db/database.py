@@ -17,7 +17,7 @@ class Database():
         except db.Error, e:
             if conn:
                 conn.rollback()
-            print "Error %s:" % e.args[0]
+            print "Error: %s" % e.args[0]
         finally:
             if conn:
                 conn.close() 
@@ -28,6 +28,25 @@ class Database():
         for idx, col in enumerate(cursor.description):
             d[col[0]] = row[idx]
         return d
+
+
+    def get_all_chat_response(self):
+        """
+        Gets all the responses in the database.
+        """
+        result = None
+        try:  
+            conn = db.connect(self.dbpath)
+            conn.row_factory = self.dict_factory
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM chat_responses")
+            result = cur.fetchall()
+        except db.Error, e:
+            print "Error: %s" % e.args[0]
+        finally:
+            if conn:
+                conn.close()
+        return result
 
 
     def get_chat_response(self, text):
@@ -43,12 +62,15 @@ class Database():
             conn = db.connect(self.dbpath)
             conn.row_factory = self.dict_factory
             cur = conn.cursor()
-            cur.execute("SELECT id FROM chat_triggers WHERE DESC LIKE '%?%'", (text,))
-            result_id = cur.fetchone()
+            cur.execute("SELECT id FROM triggers_search WHERE trigger MATCH ?;", ("'" + str(text).lower() + "'", ))
+            result_data = cur.fetchone()
+            result_id = None
+            if result_data is not None:
+                result_id = result_data["id"]
             cur.execute("SELECT response FROM chat_all WHERE trigger_id = ?", (result_id,))
             result = cur.fetchone()
         except db.Error, e:
-            print "Error %s:" % e.args[0]
+            print "Error: %s" % e.args[0]
         finally:
             if conn:
                 conn.close()
@@ -67,8 +89,9 @@ class Database():
         try:
             conn = db.connect(self.dbpath)
             cur = conn.cursor()
-            cur.execute("INSERT INTO chat_triggers (trigger) VALUES (?)", (trigger,))
+            cur.execute("INSERT INTO chat_triggers (trigger) VALUES (?)", (trigger.lower(),))
             trigger_id = cur.lastrowid
+            cur.execute("INSERT INTO triggers_search (id, trigger) VALUES (?, ?)", (trigger_id, trigger.lower()))
             cur.execute("INSERT INTO chat_responses (response) VALUES (?)", (response,))
             response_id = cur.lastrowid
             cur.execute("INSERT INTO chat_triggers_responses (triggerId, responseId) VALUES (?, ?)", (trigger_id, response_id))
@@ -77,7 +100,7 @@ class Database():
             if conn:
                 conn.rollback()
             result = False
-            print "Error %s:" % e.args[0]
+            print "Error: %s" % e.args[0]
         finally:
             if conn:
                 conn.close()
@@ -97,7 +120,7 @@ class Database():
         try:
             conn = db.connect(self.dbpath)
             cur = conn.cursor()
-            cur.execute("INSERT INTO chat_triggers (trigger) VALUES (?)", (trigger,))
+            cur.execute("INSERT INTO chat_triggers (trigger) VALUES (?)", (trigger.lower(),))
             trigger_id = cur.lastrowid
             cur.execute("INSERT INTO chat_triggers_responses (triggerId, responseId) VALUES (?, ?)", (trigger_id, response_id))
             conn.commit()
@@ -105,7 +128,7 @@ class Database():
             if conn:
                 conn.rollback()
             result = False
-            print "Error %s:" % e.args[0]
+            print "Error: %s" % e.args[0]
         finally:
             if conn:
                 conn.close()
@@ -125,7 +148,7 @@ class Database():
             cur.execute("select * from bot_settings")
             result = cur.fetchall()
         except db.Error, e:
-            print "Error %s:" % e.args[0]
+            print "Error: %s" % e.args[0]
         finally:
             if conn:
                 conn.close()
@@ -146,7 +169,7 @@ class Database():
             cur.execute("select * from bot_settings where id = ?", (bot['setting'],))
             result = cur.fetchone()
         except db.Error, e:
-            print "Error %s:" % e.args[0]
+            print "Error: %s" % e.args[0]
         finally:
             if conn:
                 conn.close()
@@ -167,7 +190,7 @@ class Database():
             cur.execute("select language from translation_voices")
             result = cur.fetchall()
         except db.Error, e:
-            print "Error %s:" % e.args[0]
+            print "Error: %s" % e.args[0]
         finally:
             if conn:
                 conn.close()
@@ -191,7 +214,7 @@ class Database():
             if conn:
                 conn.rollback()
             result = False
-            print "Error %s:" % e.args[0]
+            print "Error: %s" % e.args[0]
         finally:
             if conn:
                 conn.close()

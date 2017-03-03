@@ -15,10 +15,12 @@ New endpoints where created to interact with the database data.
 
 ## sqlite
 - Install sqlite:
-  * For Windows and Mac OS got to [sqlite website](http://sqlitebrowser.org/), download and install it.
+  * For Windows and Mac OS go to [sqlite website](http://sqlitebrowser.org/), download and install it.
   * For Linux run the command `sudo apt-get install sqlite3`
 
 ### Note
 Python should have sqlite3 module in the standard library but in case it's missing run `$VENV/bin/pip install pysqlite`
+
+You can also use sqlitebrowser to see and query the database. Just open the `tuise_database.db` file located on the `db` folder.
 
 [<< back](./README.md)

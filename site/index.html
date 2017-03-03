@@ -6,6 +6,8 @@
 	<title>TUISE-BOT</title>
 
 	<link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico"/>
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+	<link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="./css/jarvis.css" rel="stylesheet" type="text/css">
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 
@@ -16,6 +18,15 @@
 <div class="canvas_holder">
 	<canvas class="canvas" id="canvas_audio"></canvas>
 </div>
+
+<div id="disableAnim">
+	<span class="anim-text">Animation:</span>
+	<div class="toggle toggle--push toggle--push--glow">
+		<input type="checkbox" id="toggle--push--glow" class="toggle--checkbox">
+		<label class="toggle--btn" for="toggle--push--glow" data-label-on="on"  data-label-off="off"></label>
+	</div>
+</div>
+<div class="settings"><a href="./backoffice/">Settings <i class="fa fa-cog" aria-hidden="true"></a></i></div>
 
 	<!-- Arc Reactor -->
 		<div id="arc_container">

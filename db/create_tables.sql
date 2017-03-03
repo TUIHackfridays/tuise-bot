@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS chat_triggers (
   trigger TEXT NOT NULL
 );
 
+CREATE VIRTUAL TABLE IF NOT EXISTS triggers_search USING fts4(id, trigger);
+
 CREATE TABLE IF NOT EXISTS chat_responses (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   response TEXT NOT NULL
@@ -110,3 +112,5 @@ INSERT OR IGNORE INTO translation_voices (id,  language) VALUES (13, "Spanish");
 INSERT OR IGNORE INTO translation_voices (id,  language) VALUES (14, "Swedish");
 INSERT OR IGNORE INTO translation_voices (id,  language) VALUES (15, "Turkish");
 INSERT OR IGNORE INTO translation_voices (id,  language) VALUES (16, "Welsh");
+
+INSERT OR IGNORE INTO triggers_search SELECT id, trigger FROM chat_triggers;

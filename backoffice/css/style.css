@@ -1,0 +1,168 @@
+::-webkit-scrollbar {
+  width: 0.2em;
+  height: 0.2em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #02feff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00babb;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  background: rgba(2, 255, 255, 0.15);
+}
+
+@font-face {
+  font-family: 'visitor';
+  src: url('fonts/visitor1.ttf') format('truetype');
+}
+
+body {
+  font-family: 'visitor', Fallback, 'Raleway';
+  background-color: #000000;
+  color: #02feff;
+  scrollbar-face-color: #02feff;
+  scrollbar-track-color: rgba(2, 255, 255, 0.15);
+}
+
+main {
+  margin-top: 50px!important;
+}
+
+.back{
+  position: fixed;
+  top: 0;
+  margin-top: 9px;
+  width: 70px;
+  text-align: center;
+  background-color: #000000;
+  z-index: 2;
+}
+
+.back a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+.alert {
+  border-top: 1px solid #02feff;
+  border-bottom: 1px solid #02feff;
+  height: 2em;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  position: fixed;
+  top: 5px;
+  background-color: #000000;
+  z-index: 1;
+  animation: marquee 80s linear infinite;
+}
+
+.alert span {
+  line-height: 2em;
+  width: 100%;
+}
+
+.alert:hover {
+    animation-play-state: paused
+}
+
+.title {
+  text-align: center;
+  text-shadow: 0 0 15px;
+  height: 70px;
+  line-height: 70px;
+  margin-bottom: 100px;
+}
+
+.title2 {
+  margin: .8em 0 0 0;
+  font-size: 1.7em;
+  text-align: center;
+  font-weight: bold;
+  padding: .5em;
+  border: 1px solid rgba(36,198,24,1.0);
+  margin-bottom: 1ex;
+  -moz-border-radius: 1em;
+  border-radius: .7em;
+  background-color: rgba(36,198,224,1.0);
+  color: black;
+  -moz-box-shadow: 0 0 10px rgba(36,198,224,1.0);
+  -webkit-box-shadow: 0 0 10px rgba(36,198,224,1.0);
+  box-shadow: 0 0 10px rgba(36,198,224,1.0);
+}
+
+.bot-settings, .bot-cando, .bot-change-settings, .bot-add-reponse {
+  text-align: center;
+  padding: 10px;
+  border: #02feff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #02feff;
+  margin-bottom: 50px;
+}
+
+.form input, select, textarea {
+  background-color : #000000;
+  border: #02feff;
+  box-shadow: 0px 0px 5px #02feff;
+}
+
+.glow {
+  animation:glow 1s ease-in-out infinite;
+}
+
+.in-progress {
+  text-shadow: none;
+  background: -webkit-linear-gradient(-45deg, rgba(2, 254, 255, 0.6) 25%, transparent 25%, transparent 50%, rgba(2, 254, 255, 0.6) 50%, rgba(2, 254, 255, 0.6) 75%, transparent 75%, transparent), -webkit-linear-gradient(top, rgba(2, 254, 255, 1), rgba(2, 154, 155, 1));
+  background: -moz-linear-gradient(-45deg, rgba(2, 254, 255, 0.6) 25%, transparent 25%, transparent 50%, rgba(2, 254, 255, 0.6) 50%, rgba(2, 254, 255, 0.6) 75%, transparent 75%, transparent), -moz-linear-gradient(top, rgba(2, 254, 255, 1), rgba(2, 154, 155, 1));
+  background: -ms-linear-gradient(-45deg, rgba(2, 254, 255, 0.6) 25%, transparent 25%, transparent 50%, rgba(2, 254, 255, 0.6) 50%, rgba(2, 254, 255, 0.6) 75%, transparent 75%, transparent), -ms-linear-gradient(top, rgba(2, 254, 255, 1), rgba(2, 154, 155, 1));
+  background: -o-linear-gradient(-45deg, rgba(2, 254, 255, 0.6) 25%, transparent 25%, transparent 50%, rgba(2, 254, 255, 0.6) 50%, rgba(2, 254, 255, 0.6) 75%, transparent 75%, transparent), -o-linear-gradient(top, rgba(2, 254, 255, 1), rgba(2, 154, 155, 1));
+  background: linear-gradient(-45deg, rgba(2, 254, 255, 0.6) 25%, transparent 25%, transparent 50%, rgba(2, 254, 255, 0.6) 50%, rgba(2, 254, 255, 0.6) 75%, transparent 75%, transparent), linear-gradient(top, rgba(2, 254, 255, 1), rgba(2, 154, 155, 1));
+  -pie-background: linear-gradient(-45deg, rgba(2, 254, 255, 0.6) 25%, transparent 25%, transparent 50%, rgba(2, 254, 255, 0.6) 50%, rgba(2, 254, 255, 0.6) 75%, transparent 75%, transparent), linear-gradient(top, rgba(2, 254, 255, 1), rgba(2, 154, 155, 1));
+  background-repeat: repeat;
+  -webkit-background-size: 40px 40px, 100% 100%;
+  -moz-background-size: 40px 40px, 100% 100%;
+  -ms-background-size: 40px 40px, 100% 100%;
+  -o-background-size: 40px 40px, 100% 100%;
+  background-size: 40px 40px, 100% 100%;
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -moz-animation: progress-bar-stripes 2s linear infinite;
+  -ms-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+
+@-webkit-keyframes progress-bar-stripes {
+  from { background-position: 0 0; }
+  to { background-position: 40px 0; }
+}
+
+@-moz-keyframes progress-bar-stripes {
+  from { background-position: 0 0; }
+  to { background-position: 40px 0; }
+}
+
+@keyframes progress-bar-stripes {
+  from { background-position: 0 0; }
+  to { background-position: 40px 0; }
+}
+
+@keyframes glow {
+  0% { border: rgba(2, 254, 255, 1);
+  box-shadow: 0px 0px 5px rgba(2, 254, 255, 1); }
+  50% { border: rgba(2, 254, 255, .2);
+  box-shadow: 0px 0px 5px rgba(2, 254, 255, .2); }
+  100% { border: rgba(2, 254, 255, 1);
+  box-shadow: 0px 0px 5px rgba(2, 254, 255, 1); }
+}
+
+@keyframes marquee {
+  0%   { text-indent: 100% }
+  100% { text-indent: -100% }
+}

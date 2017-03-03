@@ -21,5 +21,7 @@
 ## Pyvona
 - [Pyvona voice configuration](./pyvona.md)
 
+## Microphone RPI
+- [Microphone in RPI](./mic_check.md)
 
 [<< back](../../../)
