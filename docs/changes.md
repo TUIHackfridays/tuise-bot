@@ -21,4 +21,6 @@ New endpoints where created to interact with the database data.
 ### Note
 Python should have sqlite3 module in the standard library but in case it's missing run `$VENV/bin/pip install pysqlite`
 
+You can also use sqlitebrowser to see and query the database. Just open the `tuise_database.db` file located on the `db` folder.
+
 [<< back](./README.md)
