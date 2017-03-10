@@ -1,0 +1,44 @@
+cd /home/pi
+wget https://github.com/TUIHackfridays/tuise-bot/archive/master.zip
+unzip master.zip
+cd  tuise-bot-master
+cd config
+ 
+create config.cfg file:
+[main]
+app_id = EQE48V-22KT2GXXE8
+ifttt_key = cZWBPBpnAVF2vZmasewTNw
+access_key = GDNAIQODOAGUBY6JG6ZQ
+secret_key = XHPM4khU+r8rRH9DHOjVTuXPSwimI2RPb1II7eSY
+speech_key = AIzaSyAcalCzUvPmmJ7CZBFOEWx2Z1ZSn4Vs1gg
+ 
+Virtual environment
+cd /home/pi/tuise-bot-master
+sudo pip install --upgrade pip
+sudo pip install pyvona requests pygame
+mkdir venv
+export VENV=/home/pi/tuise-bot-master/venv
+virtualenv --system-site-packages $VENV
+. $VENV/bin/activate
+$VENV/bin/pip install --upgrade pip
+$VENV/bin/pip install wolframalpha
+$VENV/bin/pip install "pyramid==1.7.3"
+$VENV/bin/pip install python-socketio
+$VENV/bin/pip install eventlet
+$VENV/bin/pip install lxml
+$VENV/bin/pip install geopy
+$VENV/bin/pip install -U pyOpenSSL
+ 
+create tuise.sh file:
+export VENV=/home/pi/tuise-bot-master/venv
+$VENV/bin/python /home/pi/tuise-bot-master/api_dudebot.py
+ 
+chmod +x tuise.sh
+ 
+Start TUIse
+cd /home/pi/tuise-bot-master
+./tuise.sh
+ 
+Open browser:
+localhost:8080
+Select the USB microphone as input and speakers as output. (...)
