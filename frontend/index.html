@@ -20,6 +20,7 @@
             background-position: top left;
             position: relative;
             transform: scaleY(.9);
+            animation: zweven 3s ease infinite;
         }
         
         .mond {
@@ -64,6 +65,14 @@
             0% { transform: scaleY(0.15); }
             10% { transform: scaleY(1.15); }
             100% { transform: scaleY(1.15); }
+        }
+        
+        @keyframes zweven {
+            0% { top:0px; }
+            5% { top:2px; }
+            50% { top:10px; }
+            55% { top:12px; }
+            100% { top:0px; }
         }
     </style>
 </head>
