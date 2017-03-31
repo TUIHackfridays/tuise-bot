@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <style>
+        .container {
+            margin: 15%;
+        }
+        
+        .wereldbol {
+            margin: 0 auto;
+            width: 300px;
+            height: 300px;
+            background-color: #c2e6fa;
+            -webkit-border-radius: 300px;
+            -moz-border-radius: 300px;
+            border-radius: 300px;
+            z-index: 9999;
+            background-image: url('img/molumen-world-map-1.png');
+            background-size: auto 300px;
+            background-position: top left;
+            position: relative;
+            transform: scaleY(.9);
+        }
+        
+        .mond {
+            position: absolute;
+            bottom: 70px;
+            left: auto;
+            text-align: center;
+            margin-left: 25%;
+        }
+        
+        .mond img {
+            width: 150px;
+        }
+        
+        .schaduw {
+            margin: 0 auto;
+            width: 300px;
+            height: 300px;
+            background-color: #ededed;
+            -webkit-border-radius: 300px;
+            -moz-border-radius: 300px;
+            border-radius: 300px;
+            transform: scaleY(.15);
+            z-index: -9999;
+        }
+        
+        .oog {
+            background-color: #DB2128;
+            width: 25px;
+            height: 25px;
+            -webkit-border-radius: 25px;
+            -moz-border-radius: 25px;
+            border-radius: 25px;
+            position:absolute;
+            top:90px;
+            right:70px;
+            transform: scaleY(1.15);
+            animation: knipoog 4s infinite;
+        }
+        
+        @keyframes knipoog {
+            0% { transform: scaleY(0.15); }
+            10% { transform: scaleY(1.15); }
+            100% { transform: scaleY(1.15); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="wereldbol">
+            <div class="mond"><img src="img/TUI.svg" /></div>
+            <div class="oog"></div>
+        </div>
+        <div class="schaduw"></div>
+    </div>
+</body>
+
+</html>
