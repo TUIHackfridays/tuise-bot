@@ -208,3 +208,7 @@ body {
 .toggle--push--glow .toggle--checkbox:checked + .toggle--btn:after {
   background-color: #0094e0;
 }
+
+.url > a:link{text-decoration: none !important; color: #02feff !important;}
+.url > a:visited{text-decoration: none !important; color: #31859b !important;}
+.url > a:hover{text-decoration: underline !important; color: #205867 !important;}

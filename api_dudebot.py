@@ -16,6 +16,7 @@ from pyramid.static import QueryStringConstantCacheBuster
 
 from commands.main_commands import process_command
 from db.database import Database
+import commands.ai_puzzle_solver.puzzle_solver as puzzSolver
 
 
 # init database
@@ -265,6 +266,36 @@ def add_chat_response(request):
 
 
 @view_config(
+    route_name='puzzle',
+    request_method=('POST'),
+    renderer='json'
+)
+def solve_puzzle(request):
+    request.response.status = 200
+    data = request.json_body
+    puz_ini = puzzSolver.list_to_puzzle(data["puzzle"])
+    result = {"solution": None, "message": None}
+    solution, message = puzzSolver.get_solution(puz_ini, flatten=True)
+    if solution is not None:
+        result["solution"] = solution
+    result["message"] = message
+    log.info(result)
+    return result
+
+@view_config(
+    route_name='puzzle',
+    request_method=('GET'),
+    renderer='json'
+)
+def get_puzzle(request):
+    request.response.status = 200
+    puz_ini = puzzSolver.generate_puzzle(flatten=True)
+    result = {"puzzle": puz_ini}
+    log.info(result)
+    return result
+    
+    
+@view_config(
     context='pyramid.exceptions.NotFound',
     renderer='json'
 )
@@ -310,6 +341,8 @@ if __name__ == '__main__':
     config.add_route('bot_all_settings', '/bot-settings-all')
     config.add_route('bot_settings', '/bot-settings')
     config.add_route('chat_response', '/chat-response')
+    config.add_route('puzzle', '/puzzle')
+    config.add_static_view(name='puzzle_solver', path='puzzle_solver', cache_max_age=3600)
     config.add_static_view(name='backoffice', path='backoffice', cache_max_age=3600)
     config.add_static_view(name='/', path='site', cache_max_age=3600)    
     # scan for @view_config decorators
