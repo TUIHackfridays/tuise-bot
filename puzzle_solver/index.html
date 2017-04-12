@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>TUISE-BOT Puzzle Solver</title>
+	<meta name="description" content="">
+  <meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/normalize.css" rel="stylesheet" type="text/css">
+	<link href="./css/skeleton.css" rel="stylesheet" type="text/css">
+	<link href="./css/vendor/sweetalert.css" rel="stylesheet" type="text/css">
+	<link href="./css/vendor/theme.fix.css" rel="stylesheet" type="text/css">
+	<link href="./css/style.css" rel="stylesheet" type="text/css">
+
+	<link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico"/>
+</head>
+
+<body>
+	<div class="back"><a href="../"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+
+	<main class="container">
+    <div class="row">
+				<h1 class="title">Puzzle Solver</h1>
+    </div>
+
+		<div class="row">
+			<div class="puzzle glow">
+				<form class="form" method="POST" onsubmit="return app.getSolution();">
+					<p class="margin">Input the puzzle values and leave the blank piece empty.</p>
+					<div class="row">
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 0, this)" />
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 1, this)" />
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 2, this)" />
+					</div>
+					<div class="row">
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 3, this)" />
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 4, this)" />
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 5, this)" />
+					</div>
+					<div class="row">
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 6, this)" />
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 7, this)" />
+						<input type="number" min="1" max="8" onchange="app.validatePuzzle(this.value, 8, this)" />
+					</div>
+					<p id="puzzle-error-msg"></p>
+					<div class="row">
+						<input class="button" type="button" value="Clear" onclick="app.clearPuzzle();" />
+						<input class="button" type="button" value="Get Random" onclick="app.randomPuzzle();" />
+						<input class="button-primary" type="submit" value="Solve" />
+					</div>
+				</form>
+			</div>
+    </div>
+
+		<div class="row">
+			<h2 class="title2">Solution</h2>
+			<div class="puzzle-steps"></div>
+		</div>
+
+  </main>
+
+	<script id="template-steps" type="x-tmpl-mustache">
+		{{#message}}
+			<p>{{message}}</p>
+		{{/message}}
+		{{#steps}}
+			<div class="puzzle-sol">
+				<p>> step {{count}} <</p>
+				{{#step}}
+					{{#lines}}
+						{{#.}}
+							<span class="piece">{{.}}</span>
+						{{/.}}
+						{{^.}}
+	  					<span class="piece">&nbsp;</span>
+						{{/.}}
+					{{/lines}}
+					<span class="line-break"></span>
+				{{/step}}
+			</div>
+		{{/steps}}
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.slim.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+	<script src="./js/vendor/sweetalert.min.js"></script>
+	<script src="./js/app.js"></script>
+</body>
+
+</html>

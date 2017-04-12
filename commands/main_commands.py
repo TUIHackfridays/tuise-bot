@@ -33,5 +33,7 @@ def process_command(command, message=""):
         talk, result, _voice = translate(message)
     elif command == "traffic":
         talk, result = traffic.traffic(message)
+    elif command == "puzzle":
+        talk, result = False, '<a class="url" href="./puzzle_solver/">Click here to open puzzle solver</a>'
 
     return talk, result, _voice
