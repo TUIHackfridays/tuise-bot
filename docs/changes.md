@@ -7,6 +7,18 @@ Adding the following new endpoints:
 - **[GET] puzzle** -- get a random puzzle **[Warning]** may not be a solvable puzzle
 - **[POST] puzzle** -- get step by step solution for the puzzle if exists
 
+## New dependencies
+No new dependencies.
+
+## New triggers
+```
+"triggers": [
+  "solve a puzzle",
+  "puzzle solver",
+  "puzzle"
+]
+```
+
 ## Changes (03-03-2017)
 The configurations files were moved inside a config folder to keep things more organized if your `config.cfg` in the project root move it inside the `config` folder.
 
