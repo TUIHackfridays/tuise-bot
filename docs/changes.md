@@ -7,10 +7,10 @@ Adding the following new endpoints:
 - **[GET] puzzle** -- get a random puzzle **[Warning]** may not be a solvable puzzle
 - **[POST] puzzle** -- get step by step solution for the puzzle if exists
 
-## New dependencies
+## New Dependencies
 No new dependencies.
 
-## New triggers
+## New Triggers
 ```
 "triggers": [
   "solve a puzzle",
@@ -27,7 +27,7 @@ New endpoints where created to interact with the database data.
 - **[GET] bot-settings-all** -- get all the bot settings
 - **[GET|POST] bot-settings** -- get and set the bot settings
 
-### New dependencies
+### Dependencies
 - For Database:
   * sqlite
 - For traffic:
